@@ -16,13 +16,6 @@
 </p>
 
 <p align="center">
-  <!-- 언어 뱃지 -->
-  <a href="README_en.md"><img src="https://img.shields.io" alt="English" /></a>
-  <a href="README_ko.md"><img src="https://img.shields.io" alt="Korean" /></a>
-  <a href="README_vi.md"><img src="https://img.shields.io" alt="Vietnamese" /></a>
-</p>
-
-<p align="center">
   <!-- 서비스 상태 뱃지 -->
   <a href="https://huggingface.co"><img src="https://img.shields.io" alt="Hugging Face Spaces" /></a>
   <a href="https://mulberry-open-api-production.up.railway.app"><img src="https://img.shields.io" alt="Server Status" /></a>
