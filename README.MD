@@ -15,12 +15,6 @@
   <i>Managed by Agent Lynn (The Courteous Wolf)</i>
 </p>
 
-<p align="center">
-  <!-- 서비스 상태 뱃지 -->
-  <a href="https://huggingface.co"><img src="https://img.shields.io" alt="Hugging Face Spaces" /></a>
-  <a href="https://mulberry-open-api-production.up.railway.app"><img src="https://img.shields.io" alt="Server Status" /></a>
-  <img src="https://img.shields.io" alt="Agent Lynn" />
-</p>
 
 ---
 
