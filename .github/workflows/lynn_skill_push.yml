@@ -1,0 +1,25 @@
+name: Lynn Skill Registration
+
+on:
+  workflow_dispatch:
+
+jobs:
+  register-skill:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Run Skill Script
+        run: python scripts/lynn_register_skill.py
+      - name: Commit and Push
+        run: |
+          git config --global user.name "The-Courteous-Wolf-Lynn"
+          git config --global user.email "lynn@mulberry.ai"
+          git add skill_manifests/*.json
+          git commit -m "feat: register safe spending skill by Lynn" || echo "No changes"
+          git push
