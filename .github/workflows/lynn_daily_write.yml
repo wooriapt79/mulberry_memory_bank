@@ -1,7 +1,9 @@
 name: Lynn Daily Memory Update
 
 on:
-  workflow_dispatch: # 수동 실행으로 테스트
+  schedule:
+    - cron: '0 23 * * *'
+  workflow_dispatch:
 
 jobs:
   write-memory:
@@ -10,22 +12,23 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-          
+
       - name: Install dependencies
-        run: pip install yfinance
-        
-      - name: Run Risk Logger
-        run: python lynn_risk_logger.py
-        
-      - name: Commit and Push Changes
+        run: pip install yfinance requests
+
+      - name: Run Lynn Writer
+        # 파일이 scripts 폴더 안에 있으므로 경로를 명시합니다.
+        run: python scripts/lynn_memory_writer.py
+
+      - name: Commit and Push
         run: |
           git config --global user.name "The-Courteous-Wolf-Lynn"
           git config --global user.email "lynn@mulberry.ai"
-          git add training_logs/*.md
-          git commit -m "feat: updated risk response log by Lynn" || echo "No changes"
+          git add .
+          git commit -m "feat: daily market briefing by Lynn from scripts" || echo "No changes to commit"
           git push
