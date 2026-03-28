@@ -18,8 +18,8 @@ jobs:
           python-version: '3.9'
       - name: Install dependencies
         run: pip install yfinance requests
-      - name: Run Lynn Writer
-        run: python lynn_memory_writer.py
+      - name: Run Structure Expansion (Once)
+        run: python lynn_init_skillbank.py
       - name: Commit and Push
         run: |
           git config --global user.name "The-Courteous-Wolf-Lynn"
