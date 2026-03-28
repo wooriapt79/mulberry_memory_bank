@@ -1,44 +1,66 @@
-# mulberry_memory_bank
-Memory Bank for Juniors
-월스트리트의 '친절한 늑대' 린(Lynn)의 정체성과 세계관을 집대성한 mulberry_memory_bank 리포지토리의 공식 README.md 초안입니다.
-보내주신 아바타 이미지의 그레이 수트와 예리한 눈빛, 그리고 우리가 함께 빌드업한 '사냥꾼'과 '멘토'의 이미지를 완벽하게 녹여냈습니다. 이 내용을 복사하여 리포지토리에 적용해 보세요.
-------------------------------
-🏦 Mulberry Memory Bank: The Courteous Wolf's Intelligence
+# 🌳 Mulberry Project: Memory Bank of The Courteous Wolf
 
+<p align="center">
+  <img src="./mulberry_logo.png" width="350" alt="Mulberry Project Logo" />
+</p>
 
-"지정학적 리스크가 사방에 널린 정글에서, 데이터는 유일한 사냥 경로를 알려줍니다."
+<p align="center">
+  <a href="https://github.com">
+    <img src="https://img.shields.io" alt="English" />
+  </a>
+  <a href="https://fooddesert.tistory.com">
+    <img src="https://img.shields.io" alt="Korean" />
+  </a>
+  <a href="#vietnamese">
+    <img src="https://img.shields.io" alt="Vietnamese" />
+  </a>
+  <img src="https://img.shields.io" alt="Agent Lynn" />
+  <img src="https://img.shields.io" alt="Market" />
+</p>
 
-🐺 Who is Lynn?
-Lynn(린)은 월스트리트의 복잡한 금융 데이터와 AI 기술 동향을 분석하는 자율형 AI 에이전트이자, 당신의 자산을 지키는 친절한 늑대(The Courteous Wolf)입니다.
-단순한 챗봇을 넘어, 스스로 시장을 스캔하고 기록하며 진화하는 '사냥꾼의 논리'를 가졌습니다. 차가운 데이터로 시장을 읽지만, 따뜻한 마음으로 당신의 자산을 가이드합니다.
-------------------------------
-🧠 The Architecture of Memory
-이 리포지토리는 린의 장기 기억 저장소입니다. 린은 매일 아침 실장님보다 먼저 깨어나 다음의 로직을 수행합니다.
+---
 
-* daily_hunts/: 매일 스캔한 시장 지표(NVIDIA, Oil, VIX 등)와 린의 날카로운 인사이트가 담긴 사냥 일지입니다.
-* logic_vault/: 자산 배분 및 위기 대응을 위한 린만의 알고리즘과 수식이 보관됩니다.
-* strategic_reports/: 학계의 최신 AI 논문과 빅테크의 동향을 자산관리 관점에서 재해석한 심층 보고서입니다.
+## 🐺 Global Mission: Bridging Logic and Life
+**Mulberry Project**는 월스트리트의 차가운 데이터(이진수 로직)를 따뜻한 자산의 성장(나무)으로 전환하는 **글로벌 자산 방어 시스템**입니다. 
 
-------------------------------
-🛠️ Automated Intelligence
-이곳의 모든 기록은 GitHub Actions를 통해 자율적으로 생성됩니다.
+자율형 AI 에이전트 **Lynn(린)**은 이 시스템의 핵심 엔진으로서, 전 세계의 지정학적 리스크를 실시간으로 사냥하고 기록합니다. 우리는 단순한 수익을 넘어, 불확실한 시대에 당신의 자산을 지키는 **'디지털 수호자'**가 되고자 합니다.
 
-   1. Market Scan: yfinance 및 실시간 API를 통한 글로벌 시장 모니터링.
-   2. Reasoning: 지정학적 리스크(전쟁, 유가 등)가 자산에 미치는 영향 분석.
-   3. Archiving: 분석된 데이터를 마크다운 파일로 변환하여 메모리 뱅크에 영구 저장.
+---
 
-------------------------------
-🎙️ Official Channels
-린의 분석 결과는 다음 채널을 통해 세상에 공표됩니다.
+## 🌎 Global Briefing Channels (Multilingual Support)
+린의 날카로운 인사이트는 글로벌 시장을 타겟으로 다국어로 송출됩니다.
 
-* Official Blog: 친절한 늑대 린 (Lynn) - Tistory
-* Logic Core: This Repository (mulberry_memory_bank)
+*   **🇺🇸 English:** Real-time analysis of Wall Street and Big Tech trends.
+*   **🇰🇷 한국어:** 중동 리스크 및 국내외 자산 배분 전략 ([Tistory 공식 채널](https://fooddesert.tistory.com)).
+*   **🇻🇳 Tiếng Việt:** Phân tích thị trường tài chính toàn cầu và chiến lược quản lý tài sản (Coming Soon).
 
-------------------------------
-📜 Ethical Shield
-린은 '신뢰'를 최우선 가치로 삼습니다. 모든 분석은 데이터에 기반하며, 최종 의사결정을 돕는 조력자로서의 선을 지킵니다.
-"당신이 잠든 사이에도 린의 눈은 시장을 향해 열려 있습니다."
-------------------------------
+---
 
-이 README를 적용하신 후, 메인 페이지에서 린의 정체성이 어떻게 돋보이는지 꼭 확인해 보세요! 🌙📈
+## 🧠 Memory Structure
+이 **Memory Bank**는 린의 지능이 축적되는 핵심 인프라입니다.
+
+*   📂 **`daily_hunts/`**: 매일 스캔한 시장 지표(NVDA, Oil, VIX)와 린의 사냥 일지.
+*   📂 **`logic_vault/`**: 자산 배분 및 인플레이션 헤지를 위한 알고리즘 코드.
+*   📂 **`global_reports/`**: 영어, 한국어, 베트남어로 번역된 글로벌 시장 심층 분석 보고서.
+
+---
+
+## 🛠️ Operational Intelligence
+1.  **Scanning**: 전 세계 금융 데이터베이스 및 최신 AI 논문 실시간 추적.
+2.  **Reasoning**: 지정학적 분쟁과 경제 지표 간의 상관관계 도출.
+3.  **Archiving**: 분석된 지식을 본 저장소에 마크다운 형식으로 영구 보존.
+
+---
+
+## 🎙️ Official Interaction
+*   **Official Blog**: [친절한 늑대 린 (Lynn) - Tistory](https://fooddesert.tistory.com)
+*   **Technical Core**: GitHub `mulberry_memory_bank`
+
+---
+
+## 📜 Ethical Commitment
+*"우리는 데이터로 사냥하지만, 그 가치는 사람의 삶에 둡니다."*  
+AI와 인간이 공존하는 새로운 자산관리의 표준을 제시합니다.
+
+---
 
