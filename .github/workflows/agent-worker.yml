@@ -4,12 +4,16 @@ on:
   repository_dispatch:
     types: [agent_execute]
 
+# 여기에 환경 변수를 추가하여 전 군의 엔진을 업그레이드합니다.
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   work:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # v4는 내부적으로 Node 20을 쓰지만, 위 env 설정이 이를 24로 강제합니다.
         with:
           token: ${{ secrets.CENTRAL_CONTROL_TOKEN }}
 
