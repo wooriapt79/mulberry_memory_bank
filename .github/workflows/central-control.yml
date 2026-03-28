@@ -1,0 +1,24 @@
+name: "Mulberry Central Command"
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "지시 사항 분석"
+        id: parse
+        run: |
+          # 제목에 [Koda]가 있으면 특정 레포로, [Trang]이 있으면 다른 레포로 보냅니다.
+          # 테스트를 위해 'wooriapt79/mulberry_memory_bank' 자기 자신에게 신호를 쏘게 설정해두겠습니다.
+          echo "target=wooriapt79/mulberry_memory_bank" >> $GITHUB_OUTPUT
+
+      - name: "원격 지시 하달"
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.CENTRAL_CONTROL_TOKEN }}
+          repository: ${{ steps.parse.outputs.target }}
+          event-type: "agent_execute"
+          client-payload: '{"instruction": "${{ github.event.issue.body }}", "issue_number": "${{ github.event.issue.number }}"}'
