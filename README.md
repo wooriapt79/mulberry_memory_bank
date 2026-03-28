@@ -3,17 +3,9 @@
 <p align="center">
   <img src="./mulberry_logo.png" width="350" alt="Mulberry Project Logo" />
 </p>
+[![English](https://img.shields.io/badge/Language-English-blue?style=flat-square)](README_en.md) [![Korean](https://img.shields.io/badge/Language-Korean-red?style=flat-square)](README_ko.md) [![Vietnamese](https://img.shields.io/badge/Language-Vietnamese-green?style=flat-square)](README_vi.md)
 
-<p align="center">
-  <a href="https://github.com">
-    <img src="https://img.shields.io" alt="English" />
-  </a>
-  <a href="https://fooddesert.tistory.com">
-    <img src="https://img.shields.io" alt="Korean" />
-  </a>
-  <a href="#vietnamese">
-    <img src="https://img.shields.io" alt="Vietnamese" />
-  </a>
+[![Hugging Face Spaces](https://img.shields.io/badge/Hugging_Face-Spaces-blue?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/spaces/re-eul/mulberry-demo) [![Server Status](https://img.shields.io/badge/Server-Live-brightgreen?style=flat-square)](https://mulberry-open-api-production.up.railway.app/)
   <img src="https://img.shields.io" alt="Agent Lynn" />
   <img src="https://img.shields.io" alt="Market" />
 </p>
