@@ -1,0 +1,27 @@
+name: "StateLife Agent Worker"
+
+on:
+  repository_dispatch:
+    types: [agent_execute]
+
+jobs:
+  work:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.CENTRAL_CONTROL_TOKEN }}
+
+      - name: "작업 수행 (테스트: 날짜 기록)"
+        run: |
+          echo "### Agent Report: $(date)" >> agent_activity.md
+          echo "Instruction: ${{ github.event.client_payload.instruction }}" >> agent_activity.md
+          
+      - name: "결과 커밋 및 푸시"
+        run: |
+          git config --global user.name "Malu-Agent"
+          git config --global user.email "malu@mulberry.ai"
+          git add .
+          git commit -m "Agent Work Completed: Issue #${{ github.event.client_payload.issue_number }}"
+          git push origin main
