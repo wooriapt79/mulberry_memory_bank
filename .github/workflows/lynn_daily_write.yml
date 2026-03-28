@@ -1,0 +1,29 @@
+name: Lynn's Daily Memory Update
+
+on:
+  schedule:
+    - cron: '0 23 * * *' # 한국 시간 기준 매일 오전 8시 실행
+  workflow_dispatch: # 실장님이 원할 때 수동 실행 가능
+
+jobs:
+  write-memory:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # 리포지토리에 글을 쓸 권한 부여
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: pip install yfinance requests
+      - name: Run Lynn's Writer
+        run: python lynn_memory_writer.py
+      - name: Commit and Push Memory
+        run: |
+          git config --global user.name "The-Courteous-Wolf-Lynn"
+          git config --global user.email "lynn@mulberry.ai"
+          git add daily_hunts/*.md
+          git commit -m "feat: ${GITHUB_WORKFLOW} updated by Lynn"
+          git push
