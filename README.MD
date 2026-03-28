@@ -1,5 +1,4 @@
-# 🌳 Mulberry Project: 
-      Memory Bank of The Courteous Wolf
+# 🌳 Mulberry Project:Memory Bank of The Courteous Wolf
 
 <p align="center">
   <!-- 프로젝트 공식 로고 -->
