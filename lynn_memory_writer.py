@@ -2,6 +2,28 @@ import os
 import datetime
 import yfinance as yf
 import requests
+
+def get_mission_topic():
+    """지령서(request.txt)를 읽어 주제를 결정하는 로직"""
+    try:
+        with open("request.txt", "r", encoding="utf-8") as f:
+            content = f.read()
+            # [INPUT] 또는 [여기에...] 문구가 포함되어 있지 않고 실제 내용이 있을 때만 지령으로 인정
+            if "MISSION_TOPIC :" in content:
+                topic = content.split("MISSION_TOPIC :")[1].split("\n")[0].strip()
+                if topic and "[" not in topic and "여기에" not in topic:
+                    return f"Special Mission: {topic}"
+    except FileNotFoundError:
+        pass
+    return "Autonomous Market Intelligence & Geopolitical Risk Scan"
+
+# 린(Lynn)의 메인 실행부
+topic = get_mission_topic()
+print(f"🐺 린의 오늘 사냥 주제: {topic}")
+
+# 이제 'topic'을 바탕으로 린이 마크다운 리포트를 작성합니다.
+
+--
 def get_mission_request():
     """request.txt에서 실장님의 지령을 읽어오는 로직"""
     try:
