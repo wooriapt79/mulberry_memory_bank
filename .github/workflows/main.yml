@@ -1,0 +1,22 @@
+name: Tistory Auto Post by Lynn
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 매일 오전 9시(KST) 자동 실행
+  workflow_dispatch: # 수동 실행 버튼 활성화
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Python Setup
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install Libs
+        run: pip install requests yfinance
+      - name: Run Lynn
+        env:
+          TISTORY_ACCESS_TOKEN: ${{ secrets.TISTORY_ACCESS_TOKEN }}
+        run: python lynn_auto_report.py
