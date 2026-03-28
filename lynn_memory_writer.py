@@ -2,6 +2,26 @@ import os
 import datetime
 import yfinance as yf
 import requests
+def get_mission_request():
+    """request.txt에서 실장님의 지령을 읽어오는 로직"""
+    try:
+        with open("request.txt", "r", encoding="utf-8") as f:
+            lines = f.readlines()
+            topic = ""
+            for line in lines:
+                if "MISSION_TOPIC :" in line:
+                    topic = line.split(":")[1].strip().replace("[", "").replace("]", "")
+            
+            # 주제가 비어있거나 기본 문구라면 기본 데일리 리포트 수행
+            if not topic or "여기에" in topic:
+                return "Daily Market Scan & Geopolitical Risk Analysis"
+            return topic
+    except FileNotFoundError:
+        return "Daily Market Scan & Geopolitical Risk Analysis"
+
+# 실행 부분에서 주제 적용
+mission = get_mission_request()
+# 이제 'mission' 변수를 사용하여 린이 글을 작성하게 됩니다!
 
 def fetch_market_intelligence():
     """린의 시장 스캔 로직"""
