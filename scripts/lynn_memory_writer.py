@@ -2,6 +2,15 @@ import os
 import datetime
 import yfinance as yf
 import requests
+import os
+
+# 스크립트 파일의 절대 경로를 기준으로 루트 디렉토리를 찾습니다.
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# 예: request.txt 경로 설정
+request_path = os.path.join(BASE_DIR, "request.txt")
+# 예: daily_hunts 폴더 경로 설정
+hunts_dir = os.path.join(BASE_DIR, "daily_hunts")
 
 def get_mission_topic():
     """지령서(request.txt)를 읽어 주제를 결정하는 로직"""
