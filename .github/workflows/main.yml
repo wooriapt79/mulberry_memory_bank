@@ -1,22 +1,27 @@
-name: Tistory Auto Post by Lynn
+name: Lynn Daily Memory Update
 
 on:
-  schedule:
-    - cron: '0 0 * * *' # 매일 오전 9시(KST) 자동 실행
-  workflow_dispatch: # 수동 실행 버튼 활성화
+  workflow_dispatch: # 실장님의 즉시 지령 대기
 
 jobs:
-  post:
+  update-all:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
-      - name: Python Setup
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
       - name: Install Libs
-        run: pip install requests yfinance
-      - name: Run Lynn
-        env:
-          TISTORY_ACCESS_TOKEN: ${{ secrets.TISTORY_ACCESS_TOKEN }}
-        run: python lynn_auto_report.py
+        run: pip install yfinance
+      - name: Run Lynn Updater
+        run: python lynn_readme_updater.py
+      - name: Commit and Push
+        run: |
+          git config --global user.name "The-Courteous-Wolf-Lynn"
+          git config --global user.email "lynn@mulberry.ai"
+          git add README.md
+          git commit -m "style: README.md status updated by Lynn" || echo "No changes"
+          git push
