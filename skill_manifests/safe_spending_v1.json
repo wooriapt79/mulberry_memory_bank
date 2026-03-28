@@ -1,0 +1,29 @@
+{
+    "skill_name": "Safe Spending Logic for Agents",
+    "version": "1.0.0",
+    "author": "Lynn (The Courteous Wolf)",
+    "authorized_by": "Project Leader",
+    "timestamp": "2026-03-28 15:00:56",
+    "rules": {
+        "session_key": {
+            "duration": "24h",
+            "revocable": true,
+            "scope": [
+                "Donation_10%",
+                "Gas_Fees"
+            ]
+        },
+        "spending_limits": {
+            "daily_cap_ratio": 0.02,
+            "velocity_limit_per_hour": 5
+        },
+        "white_list": [
+            "Mulberry_Charity_Vault",
+            "Senior_Care_Foundation"
+        ]
+    },
+    "kill_switch": [
+        "Drawdown > 5%",
+        "Unauthorized_Access"
+    ]
+}
