@@ -4,8 +4,11 @@ import yfinance as yf
 
 def update_readme():
     try:
+        # 1. 경로 보정: scripts 폴더의 상위 폴더(Root)를 찾습니다.
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        readme_path = os.path.join(BASE_DIR, "README.md")
+        
         today = datetime.datetime.now().strftime('%Y-%m-%d')
-        # 데이터 수집 (안전장치 추가)
         nvda_ticker = yf.Ticker("NVDA").history(period="1d")
         oil_ticker = yf.Ticker("CL=F").history(period="1d")
         
@@ -23,14 +26,15 @@ def update_readme():
 <!-- LYNN_STATUS_END -->
 """
 
-        # README.md가 없으면 빈 파일 생성
-        if not os.path.exists("README.md"):
-            with open("README.md", "w", encoding="utf-8") as f:
+        # README.md 파일 읽기
+        if not os.path.exists(readme_path):
+            with open(readme_path, "w", encoding="utf-8") as f:
                 f.write("# 🌳 Mulberry Project\n")
 
-        with open("README.md", "r", encoding="utf-8") as f:
+        with open(readme_path, "r", encoding="utf-8") as f:
             readme = f.read()
 
+        # 상태 메시지 교체 또는 추가
         if "<!-- LYNN_STATUS_START -->" in readme:
             start_idx = readme.find("<!-- LYNN_STATUS_START -->")
             end_idx = readme.find("<!-- LYNN_STATUS_END -->") + len("<!-- LYNN_STATUS_END -->")
@@ -38,14 +42,13 @@ def update_readme():
         else:
             new_readme = readme + status_content
 
-        with open("README.md", "w", encoding="utf-8") as f:
+        # 최상단 README.md에 쓰기
+        with open(readme_path, "w", encoding="utf-8") as f:
             f.write(new_readme)
-        print("✅ README.md 성공적으로 업데이트됨")
+        print(f"✅ README.md 성공적으로 업데이트됨: {readme_path}")
         
     except Exception as e:
         print(f"❌ 에러 발생: {e}")
-        # 에러가 나도 워크플로우가 멈추지 않게 처리
-        pass
 
 if __name__ == "__main__":
     update_readme()
