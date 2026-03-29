@@ -3,28 +3,21 @@ name: Test Lynn Import
 on:
   push:
     branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
-  workflow_dispatch:   # 수동 실행 가능
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-
-      - name: Install dependencies (if any)
+      - name: Create __init__.py in script folder
         run: |
-          pip install --upgrade pip
-          # 필요시 requirements.txt 설치
-          # if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-
-      - name: Test import LynnAgent
+          if [ -d "script" ]; then
+            touch script/__init__.py
+          fi
+      - name: Test import
         run: |
-          python -c "import sys; sys.path.insert(0, '.'); from script.lynn_core import lynnAgent; a = lynnAgent('lynn-Test', 'A'); print('✅ Import 성공')"
+          python -c "import sys; sys.path.insert(0, '.'); from script.lynn_core import LynnAgent; a = LynnAgent('Lynn-Test', 'A'); print('✅ Import 성공')"
