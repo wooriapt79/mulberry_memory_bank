@@ -1,13 +1,13 @@
 name: Lynn Daily Memory Update
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # 실장님의 수동 지령 버튼
 
 jobs:
   update-all:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write # 쓰기 권한 확실히 부여
     steps:
       - uses: actions/checkout@v3
       
@@ -17,16 +17,17 @@ jobs:
           python-version: '3.9'
           
       - name: Install Dependencies
+        # 필요한 모든 라이브러리를 한꺼번에 설치합니다.
         run: pip install yfinance pandas requests
         
-      - name: Run Lynn Script
-        # 경로를 scripts/ 폴더 내부로 지정했습니다.
+      - name: Run Lynn Updater
+        # 파일이 scripts 폴더 안에 있으므로 경로를 정확히 지정합니다.
         run: python scripts/lynn_readme_updater.py
         
       - name: Commit and Push Changes
         run: |
           git config --global user.name "The-Courteous-Wolf-Lynn"
           git config --global user.email "lynn@mulberry.ai"
-          git add README.md daily_hunts/*.md training_logs/*.md
-          git commit -m "chore: organize scripts and update status by Lynn" || echo "No changes"
+          git add README.md
+          git commit -m "style: README.md status updated by Lynn" || echo "No changes to commit"
           git push
