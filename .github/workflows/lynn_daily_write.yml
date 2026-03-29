@@ -1,9 +1,9 @@
 name: Lynn Daily Memory Update
 
 on:
+  workflow_dispatch: # 수동 버튼 활성화
   schedule:
-    - cron: '0 23 * * *' # 한국시간 오전 8시 자동 실행
-  workflow_dispatch:      # 이 줄이 있어야 실장님이 버튼을 눌러 수동 실행 가능합니다!
+    - cron: '0 23 * * *'
 
 jobs:
   write-memory:
@@ -12,19 +12,20 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
-
+      
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-
+          
       - name: Install dependencies
+        # 필수 라이브러리를 확실하게 설치합니다.
         run: pip install yfinance requests pandas
-
+        
       - name: Run Lynn Writer
-        # 어제 옮긴 scripts/ 폴더 내부 경로를 정확히 지정했습니다.
+        # scripts 폴더 안의 실행 파일을 호출합니다.
         run: python scripts/lynn_memory_writer.py
-
+        
       - name: Commit and Push
         run: |
           git config --global user.name "The-Courteous-Wolf-Lynn"
