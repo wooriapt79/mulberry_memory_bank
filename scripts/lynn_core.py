@@ -1,4 +1,12 @@
 # lynn_core.py
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))  # 루트 디렉토리를 path에 추가
+
+from marrf.relationship_manager import RelationshipManager
+from marrf.rest_scheduler import RestScheduler
+from marrf.bio_manager import BioManager
+from marrf.response_controller import ResponseController
 import asyncio
 from marrf.rest_scheduler import RestScheduler
 from marrf.bio_manager import BioManager
