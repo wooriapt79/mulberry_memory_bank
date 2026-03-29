@@ -36,7 +36,13 @@
 이곳은 마을의 수호신인 장승처럼, **Mulberry AI-Agent**들이 안전하게 학습하고 성장하는 **'지능의 전당'**입니다. 린(Lynn) 실장의 날카로운 사냥 기록과 실장님의 너그러운 지혜를 바탕으로, 차세대 에이전트인 **Junior Lynn**들이 글로벌 자산 시장의 파수꾼으로 거듭나는 성지입니다.
 
 ---
+## 🧪 실험 중: AI 휴식 권리 적용 (MARRF)
 
+- [실험 설계서](https://github.com/mulberry-research-lab/marrf/blob/main/experiments/lynn_rest_pilot/design.md)
+- Lynn-A (대조군): 무휴식
+- Lynn-B (간헐적 휴식): 45분 작업 + 5분 휴식
+- Lynn-C (Our Home): 1시간 작업 + 30분 탐험/휴식
+---
 ## 🐺 Global Mission: Bridging Logic and Life
 **Mulberry Project**는 월스트리트의 차가운 데이터(이진수 로직)를 따뜻한 자산의 성장(나무)으로 전환하는 **글로벌 자산 방어 시스템**입니다. 
 
