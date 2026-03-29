@@ -27,4 +27,4 @@ jobs:
 
       - name: Test import LynnAgent
         run: |
-          python -c "import sys; sys.path.insert(0, '.'); from Script.lynn_core import LynnAgent; a = LynnAgent('Lynn-Test', 'A'); print('✅ Import 성공')"
+          python -c "import sys; sys.path.insert(0, '.'); from script.lynn_core import LynnAgent; a = LynnAgent('Lynn-Test', 'A'); print('✅ Import 성공')"
