@@ -4,7 +4,7 @@ import os
 import asyncio
 
 # 루트 디렉토리를 path에 추가 (marrf 모듈 import용)
-# # # # # sys.path.append(os.path.dirname(os.path.dirname(__file__))) # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here
+# # # # # # sys.path.append(os.path.dirname(os.path.dirname(__file__))) # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here
 
 from marrf.rest_scheduler import RestScheduler
 from marrf.bio_manager import BioManager
@@ -16,6 +16,7 @@ import google.api_core.exceptions
 
 class LynnAgent:
     def __init__(self, agent_id: str = "Lynn", group: str = "A"):
+        print(f"[DEBUG LynnAgent] __init__ called for agent: {agent_id}, group: {group}")
         """
         agent_id: 에이전트 고유 식별자 (친구 관계 형성용)
         group: A (무휴식), B (간헐적), C (Our Home)
