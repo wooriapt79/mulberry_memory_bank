@@ -1,10 +1,12 @@
 # lynn_core.py
+--- Content of '/content/mulberry_memory_bank/scripts/lynn_core_corrected.py' ---
+# lynn_core.py
 import sys
 import os
 import asyncio
 
 # 루트 디렉토리를 path에 추가 (marrf 모듈 import용)
-# # # # # # sys.path.append(os.path.dirname(os.path.dirname(__file__))) # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here
+# # # # # # # sys.path.append(os.path.dirname(os.path.dirname(__file__))) # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here # Handled by notebook environment setup - no longer needed here
 
 from marrf.rest_scheduler import RestScheduler
 from marrf.bio_manager import BioManager
@@ -13,16 +15,19 @@ from marrf.relationship_manager import RelationshipManager
 import json
 import google.generativeai as genai
 import google.api_core.exceptions
+from deepseek.client import DeepSeekLLM
 
 class LynnAgent:
-    def __init__(self, agent_id: str = "Lynn", group: str = "A"):
+    def __init__(self, agent_id: str = "Lynn", group: str = "A", llm_provider: str = "gemini"):
         print(f"[DEBUG LynnAgent] __init__ called for agent: {agent_id}, group: {group}")
         """
-        agent_id: 에이전트 고유 식별자 (친구 관계 형성용)
-        group: A (무휴식), B (간헐적), C (Our Home)
+        agent_id: Agent unique identifier (for friend relationship formation)
+        group: A (No rest), B (Intermittent), C (Our Home)
+        llm_provider: LLM service provider to use ("gemini" or "deepseek")
         """
         self.agent_id = agent_id
         self.group = group
+        self.llm_provider = llm_provider.lower()
         self.bio_manager = BioManager(self)
         self.response_controller = ResponseController(self)
         self.rel_mgr = RelationshipManager(agent_id)
@@ -56,23 +61,37 @@ class LynnAgent:
             print(f"[{self.agent_id}] ⚠️ Persona file not found at {persona_full_path}. Using default persona.")
             self.persona_data = {"name": self.agent_id, "role": "General Agent", "tone_and_manner": "neutral", "core_values": ["efficiency"]}
 
-        # Configure LLM
+        # Configure LLM based on provider
         api_key = None
-        try:
-            from google.colab import userdata
-            api_key = userdata.get('GOOGLE_API_KEY')
-        except (ImportError, Exception): # Catch ImportError for non-Colab and other exceptions for robustness
-            api_key = os.getenv('GOOGLE_API_KEY')
-
-        if api_key:
+        if self.llm_provider == "gemini":
             try:
-                genai.configure(api_key=api_key)
-                self.llm_model = genai.GenerativeModel('gemini-pro-latest')
-                print(f"[{self.agent_id}] Gemini LLM configured successfully with gemini-pro-latest.")
-            except Exception as e:
-                print(f"[{self.agent_id}] Error configuring Gemini LLM: {e}. LLM functionality will be limited.")
+                from google.colab import userdata
+                api_key = userdata.get('GOOGLE_API_KEY')
+            except (ImportError, Exception):
+                api_key = os.getenv('GOOGLE_API_KEY')
+
+            if api_key:
+                try:
+                    genai.configure(api_key=api_key)
+                    self.llm_model = genai.GenerativeModel('gemini-pro-latest')
+                    print(f"[{self.agent_id}] Gemini LLM configured successfully with gemini-pro-latest.")
+                except Exception as e:
+                    print(f"[{self.agent_id}] Error configuring Gemini LLM: {e}. LLM functionality will be limited.")
+            else:
+                print(f"[{self.agent_id}] ⚠️ Warning: No GOOGLE_API_KEY found for Gemini. LLM functionality will be limited.")
+        elif self.llm_provider == "deepseek":
+            api_key = os.getenv('DEEPSEEK_API_KEY')
+            if api_key:
+                try:
+                    # Ensure deepseek.api.DeepSeekLLM is imported at the top of the file
+                    self.llm_model = DeepSeekLLM(api_key=api_key, model='deepseek-chat')
+                    print(f"[{self.agent_id}] DeepSeek LLM configured successfully with deepseek-chat.")
+                except Exception as e:
+                    print(f"[{self.agent_id}] Error configuring DeepSeek LLM: {e}. LLM functionality will be limited.")
+            else:
+                print(f"[{self.agent_id}] ⚠️ Warning: No DEEPSEEK_API_KEY found. LLM functionality will be limited.")
         else:
-            print(f"[{self.agent_id}] ⚠️ Warning: No GOOGLE_API_KEY found. LLM functionality will be limited.")
+            print(f"[{self.agent_id}] ❌ Error: Unsupported LLM provider: {self.llm_provider}. LLM functionality will be limited.")
 
         if group == "B":
             self.rest_scheduler = RestScheduler(self, work_minutes=45, rest_minutes=5)
@@ -97,10 +116,8 @@ class LynnAgent:
 
     async def generate_response(self, query):
         if self.llm_model:
-            # Dynamically construct persona context using loaded persona data
             name = self.persona_data.get("name", self.agent_id)
             role = self.persona_data.get("role", "general agent")
-            # Handle cases where research_focus or core_values might be single strings instead of lists
             research_focus_raw = self.persona_data.get("research_focus", ["various topics"])
             research_focus = ", ".join(research_focus_raw) if isinstance(research_focus_raw, list) else research_focus_raw
 
@@ -112,33 +129,45 @@ class LynnAgent:
             mentor = self.persona_data.get("mentor", "an experienced agent")
 
             persona_context = (
-                f"당신은 {name}이며, {mentor}의 멘토를 둔 {role}입니다. "
-                f"주요 연구 분야는 {research_focus}입니다. "
-                f"답변은 {tone_and_manner}한 어조와 {core_values}의 핵심 가치를 바탕으로 해야 합니다. "
-                f"다음 요청에 답변하세요: "
+                f"You are {name}, a {role} mentored by {mentor}. "
+                f"Your main research area is {research_focus}. "
+                f"Your responses should be {tone_and_manner} in tone and based on the core values of {core_values}. "
+                f"Answer the following request: "
             )
             full_query = persona_context + query
 
             retries = 1
             delay = 0.1
             rest_duration_minutes = 1
-            for i in range(retries):
-                try:
-                    response = await self.llm_model.generate_content(full_query)
-                    return f"[{self.agent_id} 분석] {response.text}"
-                except google.api_core.exceptions.ResourceExhausted as e:
-                    print(f"[{self.agent_id}] Quota exceeded (attempt {i+1}/{retries}). Retrying in {delay} seconds...")
-                    await asyncio.sleep(delay)
-                    delay *= 2  # Exponential backoff
-                except Exception as e:
-                    print(f"[{self.agent_id}] LLM 응답 생성 중 오류 발생: {e}")
-                    return f"[{self.agent_id} 분석 (LLM 오류)] LLM 응답 생성 중 오류 발생: {e}. 기본 응답으로 대체합니다: {query}에 대한 응답입니다."
 
-            print(f"[{self.agent_id}] API 할당량이 초과되어 강제 휴식에 들어갑니다.")
-            self.on_rest_start(duration=rest_duration_minutes, extra=True)
-            return f"[{self.agent_id} 분석] 현재 API 할당량이 초과되어 상세한 응답을 제공하기 어렵습니다. 잠시 후 다시 시도해 주세요. ({query}에 대한 응답입니다.)"
+            if self.llm_provider == "gemini":
+                for i in range(retries):
+                    try:
+                        response = await self.llm_model.generate_content(full_query)
+                        return f"[{self.agent_id} Analysis] {response.text}"
+                    except google.api_core.exceptions.ResourceExhausted as e:
+                        print(f"[{self.agent_id}] Quota exceeded (attempt {i+1}/{retries}). Retrying in {delay} seconds...")
+                        await asyncio.sleep(delay)
+                        delay *= 2
+                    except Exception as e:
+                        print(f"[{self.agent_id}] LLM response generation error: {e}")
+                        return f"[{self.agent_id} Analysis (LLM error)] LLM response generation error: {e}. Substituting with default response: Response for {query}."
+
+                print(f"[{self.agent_id}] API quota exceeded, forcing rest.")
+                self.on_rest_start(duration=rest_duration_minutes, extra=True)
+                return f"[{self.agent_id} Analysis] API quota currently exceeded. Unable to provide detailed response. Please try again later. (Response for {query}.)"
+            elif self.llm_provider == "deepseek":
+                try:
+                    messages = [{"role": "user", "content": full_query}]
+                    response = await self.llm_model.chat(messages=messages)
+                    return f"[{self.agent_id} Analysis] {response.choices[0].message.content}"
+                except Exception as e:
+                    print(f"[{self.agent_id}] DeepSeek LLM response generation error: {e}")
+                    return f"[{self.agent_id} Analysis (DeepSeek LLM error)] {e}. Substituting with default response: Response for {query}."
+            else:
+                return f"[{self.agent_id} Analysis] Unsupported LLM provider. (Response for {query}.)"
         else:
-            return f"[{self.agent_id} 분석] 현재 상세한 응답을 제공하기 어렵습니다. ({query}에 대한 응답입니다.)"
+            return f"[{self.agent_id} Analysis] Unable to provide detailed response. (Response for {query}.)"
 
     async def handle_query(self, query, context=None):
         return await self.response_controller.process_response(query, context)
@@ -155,10 +184,10 @@ class LynnAgent:
     def remove_participant_from_agent(self, participant_id: str) -> bool:
         return self.rel_mgr.remove_participant(participant_id)
 
-# 간단한 테스트 (주석 처리됨)
+# Simple test (commented out)
 # if __name__ == "__main__":
 #     async def test():
 #         lynn_b = LynnAgent(agent_id="Lynn-B", group="B")
-#         print(await lynn_b.handle_query("NVDA 주가 전망"))
+#         print(await lynn_b.handle_query("NVDA stock outlook"))
 #         await asyncio.sleep(10)
 #     asyncio.run(test())
