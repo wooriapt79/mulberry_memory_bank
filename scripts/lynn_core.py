@@ -3,11 +3,11 @@ import sys
 import os
 import asyncio
 import json
-try:
-    import google.generativeai as genai
-except ImportError:
-    genai = None
-import google.api_core.exceptions
+#try:
+   #import google.generativeai as genai
+#except ImportError:
+    #genai = None
+#import google.api_core.exceptions
 from deepseek import DeepSeek # Corrected import statement: from deepseek import DeepSeek
 
 # 루트 디렉토리를 path에 추가 (marrf 모듈 import용)
