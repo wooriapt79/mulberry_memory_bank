@@ -3,7 +3,10 @@ import sys
 import os
 import asyncio
 import json
+try:
 import google.generativeai as genai
+except ImportError:
+       genai = None
 import google.api_core.exceptions
 from deepseek import DeepSeek # Corrected import statement: from deepseek import DeepSeek
 
