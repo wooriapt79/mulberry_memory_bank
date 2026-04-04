@@ -1,0 +1,47 @@
+# .github/workflows/python-tests.yml
+# 수정본 — Nguyen Trang 2026-04-04
+# 에러 원인: tests/ 폴더 없을 때 pytest 실패 → 조건부 실행으로 수정
+
+name: Python Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pytest pytest-cov flake8
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Lint with flake8 (syntax errors only)
+      run: |
+        # E9: syntax error, F63: invalid escape, F7: syntax error, F82: undefined name
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+      continue-on-error: false
+
+    - name: Run tests (tests/ 폴더 있을 때만)
+      run: |
+        if [ -d "tests" ] && [ "$(ls -A tests/)" ]; then
+          pytest tests/ -v --cov=./ --cov-report=xml
+        else
+          echo "⚠️  tests/ 폴더가 없습니다. 테스트를 건너뜁니다."
+          echo "    → tests/ 폴더와 test_*.py 파일을 추가하면 자동 실행됩니다."
+        fi
