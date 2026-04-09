@@ -8,7 +8,11 @@ import json
 #except ImportError:
     #genai = None
 #import google.api_core.exceptions
-from deepseek import DeepSeek # Corrected import statement: from deepseek import DeepSeek
+#Optional dependency: deepseek
+try:
+    from deepseek import DeepSeek
+except ImportError:
+    DeepSeek = None # Corrected import statement: from deepseek import DeepSeek
 
 # 루트 디렉토리를 path에 추가 (marrf 모듈 import용)
 # # # # # # # sys.path.append(os.path.dirname(os.path.dirname(__file__))) # Handled by notebook environment setup - no longer needed here
