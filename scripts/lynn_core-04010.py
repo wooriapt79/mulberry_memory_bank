@@ -1,4 +1,7 @@
 # lynn_core.py
+import google.generativeai as genai  # <--- 이 줄을 추가해야 합니다.
+
+# ... 기존 코드들 ...
 import sys
 import os
 import asyncio
