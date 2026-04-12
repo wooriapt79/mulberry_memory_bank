@@ -1,4 +1,7 @@
 # script/jr_lynn.py
+import logging  # <--- 이 줄을 추가해야 합니다.
+
+# ... 기존 코드들 ...
 import sys
 import os
 import asyncio
