@@ -12,7 +12,7 @@ jobs:
         id: parse
         run: |
           # 제목에 [Koda]가 있으면 특정 레포로, [Trang]이 있으면 다른 레포로 보냅니다.
-          # 테스트를 위해 'wooriapt79/mulberry_memory_bank' 자기 자신에게 신호를 쏘게 설정해두겠습니다.
+          # 현재는 테스트를 위해 자기 자신에게 신호를 쏘게 설정되어 있습니다.
           echo "target=wooriapt79/mulberry_memory_bank" >> $GITHUB_OUTPUT
 
       - name: "원격 지시 하달"
@@ -21,4 +21,9 @@ jobs:
           token: ${{ secrets.CENTRAL_CONTROL_TOKEN }}
           repository: ${{ steps.parse.outputs.target }}
           event-type: "agent_execute"
-          client-payload: '{"instruction": "${{ github.event.issue.body }}", "issue_number": "${{ github.event.issue.number }}"}'
+          # [Malu의 긴급 처방]: toJson()을 사용하여 특수문자 및 줄바꿈 에러를 원천 차단합니다.
+          client-payload: >
+            {
+              "instruction": ${{ toJson(github.event.issue.body) }},
+              "issue_number": ${{ toJson(github.event.issue.number) }}
+            }
