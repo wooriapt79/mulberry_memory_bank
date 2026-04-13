@@ -1,2 +1,2 @@
 
-MCP Gateway에 등록
+Mulberry MCP Gateway에 등록
