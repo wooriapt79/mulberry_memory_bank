@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mulberry-memory-bank"
+version = "0.1.0"
+requires-python = ">=3.10"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+fix = true
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "C90", "B", "UP", "SIM"]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["C90"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+addopts = "-v --tb=short -q"
+markers = [
+    "hygiene: 코드 위생 검수 관련 테스트",
+    "handoff: 인계 준비도 관련 테스트",
+]
+
+[tool.mulberry.hygiene]
+threshold = 80
+max_complexity = 10
+min_docstring_ratio = 0.8
+min_type_hint_ratio = 0.7

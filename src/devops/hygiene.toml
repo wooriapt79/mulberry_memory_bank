@@ -1,0 +1,18 @@
+# src/devops/hygiene.toml
+# Mulberry Code Hygiene 기준치 설정 — RyuWon (流願)
+
+[handoff]
+threshold = 80          # 인계 합격 기준점 (100점 만점)
+auto_fix = true         # ruff --fix 자동 실행 여부
+
+[weights]
+syntax        = 0.30
+lint          = 0.25
+complexity    = 0.20
+documentation = 0.15
+type_hints    = 0.10
+
+[limits]
+max_complexity      = 10   # 함수당 순환 복잡도 상한
+min_docstring_ratio = 0.80 # 문서화 최소 비율
+min_type_hint_ratio = 0.70 # 타입 힌트 최소 비율
