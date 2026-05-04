@@ -20,7 +20,7 @@ jobs:
           python-version: '3.9'
           
       - name: Install dependencies
-        run: pip install yfinance requests pandas
+        run: pip install yfinance requests pandas ruff
 
       - name: Run Lynn Writer
         run: python scripts/lynn_memory_writer.py
@@ -28,10 +28,18 @@ jobs:
       - name: Run Risk Logger
         run: python scripts/lynn_risk_logger.py
 
+      - name: Self Hygiene Check (RyuWon Gate)
+        run: |
+          echo "[RyuWon] Lynn 자가 검수 시작..."
+          python -m src.devops.cli scripts/ --threshold 80 --output hygiene-report.txt
+          echo "[RyuWon] 검수 완료 — 인계 준비 확인됨"
+        env:
+          PYTHONPATH: .
+
       - name: Commit and Push
         run: |
           git config --global user.name "The-Courteous-Wolf-Lynn"
           git config --global user.email "lynn@mulberry.ai"
-          git add daily_hunts/ agent_activity.md training_logs/
-          git commit -m "feat(lynn): daily arxiv hunt + market briefing + risk log $(date +%Y-%m-%d)" || echo "No changes to commit"
+          git add daily_hunts/ agent_activity.md training_logs/ hygiene-report.txt
+          git commit -m "feat(lynn): daily arxiv hunt + market briefing + risk log $(date +%Y-%m-%d) [hygiene:PASS]" || echo "No changes to commit"
           git push
