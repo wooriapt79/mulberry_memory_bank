@@ -31,17 +31,8 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 
 단순 요약이 아니라, 우리 Mulberry 프로젝트에 어떻게 실질적으로 적용할지에 대한 너의 분석을 반드시 포함할 것.
 
-### 2026-05-04 — Lynn Daily Hunt
-- 수집 논문: 0편
-- 최고 연관 논문: N/A
-- 상태: ✅ 완료
-
-### 2026-05-04 — Lynn Daily Hunt
+### 2026-05-04 — Lynn Daily Hunt [Phase 1 가동 첫날]
 - 수집 논문: 5편
 - 최고 연관 논문: Can Coding Agents Reproduce Findings in Computational Materials Science?
-- 상태: ✅ 완료
-
-### 2026-05-04 — Lynn Daily Hunt
-- 수집 논문: 5편
-- 최고 연관 논문: Can Coding Agents Reproduce Findings in Computational Materials Science?
-- 상태: ✅ 완료
+- 상태: 완료
+- 비고: arxiv_hunter.py 신규 구현 — 이전 플레이스홀더 방식에서 실제 API 수집으로 전환
