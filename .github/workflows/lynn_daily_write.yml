@@ -25,10 +25,13 @@ jobs:
       - name: Run Lynn Writer
         run: python scripts/lynn_memory_writer.py
 
+      - name: Run Risk Logger
+        run: python scripts/lynn_risk_logger.py
+
       - name: Commit and Push
         run: |
           git config --global user.name "The-Courteous-Wolf-Lynn"
           git config --global user.email "lynn@mulberry.ai"
-          git add daily_hunts/ agent_activity.md
-          git commit -m "feat(lynn): daily arxiv hunt + market briefing $(date +%Y-%m-%d)" || echo "No changes to commit"
+          git add daily_hunts/ agent_activity.md training_logs/
+          git commit -m "feat(lynn): daily arxiv hunt + market briefing + risk log $(date +%Y-%m-%d)" || echo "No changes to commit"
           git push
