@@ -18,7 +18,7 @@ jobs:
       - name: "원격 지시 하달"
         uses: peter-evans/repository-dispatch@v3
         with:
-          token: ${{ secrets.CENTRAL_CONTROL_TOKEN }}
+          token: ${{ secrets.Mulberry_CONTROL_TOKEN }}
           repository: ${{ steps.parse.outputs.target }}
           event-type: "agent_execute"
           # [Malu의 긴급 처방]: toJson()을 사용하여 특수문자 및 줄바꿈 에러를 원천 차단합니다.

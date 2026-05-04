@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4 # v4는 내부적으로 Node 20을 쓰지만, 위 env 설정이 이를 24로 강제합니다.
         with:
-          token: ${{ secrets.CENTRAL_CONTROL_TOKEN }}
+          token: ${{ secrets.Mulberry_CONTROL_TOKEN }}
 
       - name: "작업 수행 (테스트: 날짜 기록)"
         run: |
