@@ -2,3 +2,16 @@
 appengine-generated/
 
 mulberry-research-lab/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db

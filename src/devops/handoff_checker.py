@@ -1,6 +1,6 @@
 # src/devops/handoff_checker.py
 """
-Mulberry Handoff Readiness Engine — RyuWon (流願)
+Mulberry Handoff Readiness Engine -RyuWon (流願)
 
 철학: "코드 위생은 윤리다. 다음 작업자를 위한 배려가 코드에 담겨야 한다."
      "에러 없는 인계는, 다음 사람에게 건네는 정중한 인사입니다."
@@ -53,7 +53,7 @@ class HandoffReadinessChecker:
         report = HandoffReport(threshold=self.threshold)
         metrics = HygieneMetrics()
 
-        # 1. 구문 안전성 — 실패 시 즉시 0점
+        # 1. 구문 안전성 -실패 시 즉시 0점
         metrics.syntax_valid = self._check_syntax()
         if not metrics.syntax_valid:
             report.score = 0
@@ -149,26 +149,26 @@ class HandoffReadinessChecker:
     def _generate_feedback(self, m: HygieneMetrics, score: int) -> List[str]:
         fb = []
         if m.lint_errors > 0:
-            fb.append(f"린트 오류 {m.lint_errors}개 — `ruff check --fix` 권장")
+            fb.append(f"린트 오류 {m.lint_errors}개 -`ruff check --fix` 권장")
         if m.avg_complexity > 10:
-            fb.append(f"복잡도 {m.avg_complexity:.1f} — 함수 분할 권장 (기준: 10)")
+            fb.append(f"복잡도 {m.avg_complexity:.1f} -함수 분할 권장 (기준: 10)")
         if m.docstring_ratio < 0.8:
-            fb.append(f"문서화 {m.docstring_ratio:.0%} — 다음 작업자를 위한 설명이 필요합니다")
+            fb.append(f"문서화 {m.docstring_ratio:.0%} -다음 작업자를 위한 설명이 필요합니다")
         if m.type_hint_ratio < 0.7:
-            fb.append(f"타입 힌트 {m.type_hint_ratio:.0%} — 명확한 타입 정의가 피로를 줄입니다")
+            fb.append(f"타입 힌트 {m.type_hint_ratio:.0%} -명확한 타입 정의가 피로를 줄입니다")
         if not fb:
-            fb.append("코드 위생 상태 양호 — 다음 작업자에게 존중을 담아 인계하세요")
+            fb.append("코드 위생 상태 양호 -다음 작업자에게 존중을 담아 인계하세요")
         return fb
 
     def _generate_handoff_note(self, m: HygieneMetrics, score: int, passed: bool) -> str:
-        status = "[PASS] 인계 준비 완료" if passed else "[HOLD] 인계 보류 — 수정 필요"
+        status = "[PASS] 인계 준비 완료" if passed else "[HOLD] 인계 보류 -수정 필요"
         message = (
             "이 코드는 다음 작업자의 시간을 존중합니다. 편하게 작업하세요."
             if passed else
             "아직 피로를 전가할 요소가 있습니다. 스스로 다듬은 후 인계해 주세요."
         )
         return (
-            f"\nMultberry Handoff Note — RyuWon (流願)\n"
+            f"\nMulberry Handoff Note - RyuWon (流願)\n"
             f"{'─' * 42}\n"
             f"상태 : {status}\n"
             f"점수 : {score}/100  (기준: {self.threshold})\n"
