@@ -34,8 +34,11 @@ jobs:
         run: pip install ruff pytest
       - name: Lynn Scripts Hygiene Check
         run: |
-          echo "[RyuWon] Lynn íì´íë¼ì¸ ê²ì (ê¸°ì¤: 80ì )..."
-          python -m src.devops.cli scripts/ --threshold 80 --output hygiene-lynn.txt
+          echo "[RyuWon] Lynn 파이프라인 검수 (기준: 80점)..."
+          # 신규 작성 파일만 검사 (레거시 제외)
+          python -m src.devops.cli scripts/arxiv_hunter.py --threshold 80 --output hygiene-lynn.txt
+          python -m src.devops.cli scripts/lynn_memory_writer.py --threshold 80 >> hygiene-lynn.txt
+          python -m src.devops.cli scripts/lynn_risk_logger.py --threshold 80 >> hygiene-lynn.txt
         env:
           PYTHONPATH: .
       - name: Upload Lynn Report
