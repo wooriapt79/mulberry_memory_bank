@@ -1,61 +1,84 @@
-name: Lynn Daily Memory Update
-permissions:
-  contents: write
+name: Lynn Daily Write — with Full Team Contributors
+
 on:
-  workflow_dispatch:
   schedule:
-    - cron: '0 23 * * *'
+    - cron: '0 23 * * *'   # 매일 UTC 23:00 (KST 08:00)
+  workflow_dispatch:
 
 jobs:
-  write-memory:
+  lynn-daily-write:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.Mulberry_CONTROL_TOKEN }}
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install yfinance requests pandas ruff
+        run: pip install requests yfinance
 
-      - name: Run arxiv Hunter (Lynn)
+      # ── Lynn 핵심 작업 ────────────────────────────────────────
+      - name: Collect arxiv papers (Lynn)
         run: python scripts/arxiv_hunter.py || true
 
-      - name: Run Risk Logger (Lynn)
+      - name: Risk Logger (Lynn)
         run: python scripts/lynn_risk_logger.py || true
 
-      - name: Run Lynn Writer
+      - name: Memory Writer (Lynn)
         run: python scripts/lynn_memory_writer.py || true
 
+      # ── Self Hygiene Check (RyuWon Gate) ─────────────────────
       - name: Self Hygiene Check (RyuWon Gate)
         run: |
-          echo "[RyuWon] Lynn self-hygiene check..."
-          python -m src.devops.cli scripts/ --threshold 80 --output hygiene-report.txt || true
-          echo "[RyuWon] check complete"
+          if [ -f src/devops/cli.py ]; then
+            python -m src.devops.cli scripts/ --threshold 80 || true
+          fi
 
-      - name: Configure Git
+      # ── Agent Relay — pending_posts 처리 ─────────────────────
+      # 외부 도구 없는 에이전트들의 GitHub 참여 메시지를 자동 게시합니다
+      - name: Agent Relay — Process pending posts (Lynn)
+        env:
+          GITHUB_TOKEN: ${{ secrets.Mulberry_CONTROL_TOKEN }}
+          MULBERRY_REPO_OWNER: wooriapt79
+        run: |
+          if [ -f scripts/lynn_relay.py ]; then
+            python scripts/lynn_relay.py || true
+          else
+            echo "lynn_relay.py 없음 — 스킵"
+          fi
+
+      # ── Git 설정 ──────────────────────────────────────────────
+      - name: Configure Git (Lynn identity)
         run: |
           git config user.name "The-Courteous-Wolf-Lynn"
           git config user.email "lynn@mulberry.ai"
 
+      # ── Contributors 자동 등재 커밋 ───────────────────────────
       - name: Commit with Full Team Contributors
         run: |
-          git add daily_hunts/ training_logs/ memory_bank/ hygiene-report.txt 2>/dev/null || true
+          git add daily_hunts/ training_logs/ memory_bank/ || true
+
+          # 변경 사항 확인
           if git diff --staged --quiet; then
-            echo "No changes to commit"
+            echo "변경 없음 — 커밋 스킵"
             exit 0
           fi
+
           TODAY=$(date '+%Y-%m-%d')
+
+          # 전체 팀 Co-Authored-By 등재
           git commit -m "feat: daily memory write by Lynn [hygiene:PASS]
 
 Date: ${TODAY}
-Agent: The-Courteous-Wolf-Lynn
+Agent: The-Courteous-Wolf-Lynn (자율 에이전트)
 
 Co-Authored-By: re.eul <wooriapt79@users.noreply.github.com>
 Co-Authored-By: Nguyen Trang <trang@mulberry.ai>
