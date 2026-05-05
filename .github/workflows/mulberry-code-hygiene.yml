@@ -1,18 +1,26 @@
-name: Mulberry Code Hygiene — RyuWon
+name: Mulberry Code Hygiene â RyuWon
 
-# 정책:
-#   scripts/ (Lynn 파이프라인) → threshold 80, 실패 시 차단
-#   그 외 (marrf/, src/, experiments/) → threshold 60, 경고만 (차단 없음)
-#   이유: 연구·실험 에이전트는 아이디어 흐름이 먼저다
+# ì ì±:
+#   scripts/ (Lynn íì´íë¼ì¸) â threshold 80, ì¤í¨ ì ì°¨ë¨
+#   ê·¸ ì¸ (marrf/, src/, experiments/) â threshold 60, ê²½ê³ ë§ (ì°¨ë¨ ìì)
+#   ì´ì : ì°êµ¬Â·ì¤í ìì´ì í¸ë ìì´ëì´ íë¦ì´ ë¨¼ì ë¤
 
 on:
   push:
     branches: [main, develop]
+    paths-ignore:
+      - '**.md'
+      - 'agent_activity.md'
+      - 'training_logs/**'
+      - 'daily_hunts/**'
   pull_request:
     branches: [main, develop]
+    paths-ignore:
+      - '**.md'
+      - 'agent_activity.md'
 
 jobs:
-  # ── Lynn 파이프라인 (엄격 게이트) ──────────────────────────
+  # ââ Lynn íì´íë¼ì¸ (ìê²© ê²ì´í¸) ââââââââââââââââââââââââââ
   lynn-hygiene-gate:
     name: Lynn Pipeline Gate (threshold 80)
     runs-on: ubuntu-latest
@@ -26,7 +34,7 @@ jobs:
         run: pip install ruff pytest
       - name: Lynn Scripts Hygiene Check
         run: |
-          echo "[RyuWon] Lynn 파이프라인 검수 (기준: 80점)..."
+          echo "[RyuWon] Lynn íì´íë¼ì¸ ê²ì (ê¸°ì¤: 80ì )..."
           python -m src.devops.cli scripts/ --threshold 80 --output hygiene-lynn.txt
         env:
           PYTHONPATH: .
@@ -38,7 +46,7 @@ jobs:
           path: hygiene-lynn.txt
           retention-days: 30
 
-  # ── 연구·실험 에이전트 (여유 게이트 — 경고만) ──────────────
+  # ââ ì°êµ¬Â·ì¤í ìì´ì í¸ (ì¬ì  ê²ì´í¸ â ê²½ê³ ë§) ââââââââââââââ
   research-hygiene-advisory:
     name: Research Agents Advisory (threshold 60, warn only)
     runs-on: ubuntu-latest
@@ -52,9 +60,9 @@ jobs:
         run: pip install ruff pytest
       - name: Research Code Advisory Check
         run: |
-          echo "[RyuWon] 연구 에이전트 검수 (기준: 60점, 차단 없음)..."
+          echo "[RyuWon] ì°êµ¬ ìì´ì í¸ ê²ì (ê¸°ì¤: 60ì , ì°¨ë¨ ìì)..."
           python -m src.devops.cli marrf/ --threshold 60 --output hygiene-research.txt || true
-          echo "[RyuWon] 참고용 리포트입니다. 연구의 흐름을 막지 않습니다."
+          echo "[RyuWon] ì°¸ê³ ì© ë¦¬í¬í¸ìëë¤. ì°êµ¬ì íë¦ì ë§ì§ ììµëë¤."
         env:
           PYTHONPATH: .
       - name: Upload Research Report
