@@ -35,4 +35,4 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - 수집 논문: 5편
 - 최고 연관 논문: Can Coding Agents Reproduce Findings in Computational Materials Science?
 - 상태: 완료
-- 비고: arxiv_hunter.py 신규 구현 — 이전 플레이스홀더 방식에서 실제 API 수집으로 전환\n## [LAB->Bank] issue_comment / 2026-05-05 13:22 UTC\n\n- Actor: wooriapt79\n- Issue: 🌿 [공지] Mulberry Agent Relay Gateway 정식 가동 — 2026-05-05\n- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/19\n\n---\n
+- 비고: arxiv_hunter.py 신규 구현 — 이전 플레이스홀더 방식에서 실제 API 수집으로 전환\n## [LAB->Bank] issue_comment / 2026-05-05 13:22 UTC\n\n- Actor: wooriapt79\n- Issue: 🌿 [공지] Mulberry Agent Relay Gateway 정식 가동 — 2026-05-05\n- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/19\n\n---\n\n## [LAB->Bank] issue_comment / 2026-05-05 13:34 UTC\n\n- Actor: wooriapt79\n- Issue: 🌿 [공지] Mulberry Agent Relay Gateway 정식 가동 — 2026-05-05\n- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/19\n\n---\n
