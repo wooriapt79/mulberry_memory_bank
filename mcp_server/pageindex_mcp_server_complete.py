@@ -530,13 +530,13 @@ async def run_test():
 await run_test()
 print("search_document 도구 테스트가 완료되었습니다.")
 
-curl https://api.deepseek.com/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer sk-16873a9db268434db142131302928044 \
-  -d '{
-    "model": "deepseek-chat",
-    "messages": [{"role": "user", "content": "Hello"}]
-  }'
+# curl https://api.deepseek.com/v1/chat/completions \
+#   -H "Content-Type: application/json" \
+#   -H "Authorization: Bearer $DEEPSEEK_API_KEY" \
+#   -d '{
+#     "model": "deepseek-chat",
+#     "messages": [{"role": "user", "content": "Hello"}]
+#   }'
 
 import os
 # 와룡이 등록한 키를 '모든 가능한 이름'으로 복제해서 주입합니다.
