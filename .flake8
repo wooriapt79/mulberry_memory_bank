@@ -1,0 +1,11 @@
+[flake8]
+# mcp_server/ : Colab 생성 파일 (Jupyter 문법 포함) — 검사 제외
+# marrf/, experiments/ : 연구·실험 코드 — 연구 흐름 우선
+exclude =
+    mcp_server/,
+    marrf/,
+    experiments/,
+    .git,
+    __pycache__,
+    *.egg-info
+max-line-length = 120
