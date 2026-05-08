@@ -216,3 +216,95 @@ Respond accurately and objectively."""
                 llm_response += " (Note: adjusted for analytical bias as per mHC directive)."
 
         return llm_response
+
+    # ------------------------------------------------------------
+    # SDK 연동 (Mulberry Connector SDK v1/action/execute)
+    # Trang Manager 패치 2026-05-08
+    # ------------------------------------------------------------
+
+    def call_sdk(
+        self,
+        intent: str,
+        content: str,
+        issue_number: int = None,
+        repo: str = "wooriapt79/mulberry-research-lab",
+        bypass_spirit: bool = False,
+    ) -> dict:
+        """
+        Mulberry Connector SDK POST /v1/action/execute 호출.
+        Spirit Score + Hesitation + Handoff 정책 검증 후 실행.
+
+        환경변수:
+          SDK_URL        -- SDK 서버 주소
+          GATEWAY_SECRET -- 인증 헤더값 (대표님께 확인)
+        """
+        import urllib.request as _req
+        import json as _json
+
+        sdk_url = os.environ.get(
+            "SDK_URL",
+            "https://mulberry-research-lab-production-7a70.up.railway.app"
+        )
+        gateway_secret = os.environ.get("GATEWAY_SECRET", "mulberry-agent-relay-2026")
+        endpoint = f"{sdk_url}/v1/action/execute"
+
+        payload = {
+            "agent": self.agent_id.lower(),
+            "intent": intent,
+            "content": content,
+            "repo": repo,
+            "bypass_spirit": bypass_spirit,
+        }
+        if issue_number:
+            payload["issue_number"] = issue_number
+
+        data = _json.dumps(payload).encode("utf-8")
+        request = _req.Request(
+            endpoint,
+            data=data,
+            headers={
+                "x-gateway-secret": gateway_secret,
+                "Content-Type": "application/json",
+            },
+            method="POST",
+        )
+        try:
+            with _req.urlopen(request, timeout=30) as resp:
+                result = _json.loads(resp.read())
+                print(f"[{self.agent_id}] SDK response: {result.get('decision')} / {result.get('status')}")
+                return result
+        except Exception as e:
+            print(f"[{self.agent_id}] SDK call failed: {e}")
+            return {"decision": "ERROR", "status": "sdk_unreachable", "reason": str(e)}
+
+    def check_rest_signal(self) -> bool:
+        """
+        burnout_monitor.py 가 생성한 강제 휴식 신호 파일 확인.
+        CRITICAL 번아웃 감지 시 BioManager charging 상태로 전환.
+        Returns True if rest signal was triggered.
+        """
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        repo_root = os.path.abspath(os.path.join(script_dir, os.pardir))
+        signal_path = os.path.join(
+            repo_root, "training_logs",
+            f"{self.agent_id.lower()}_rest_signal.json"
+        )
+        if not os.path.exists(signal_path):
+            return False
+        try:
+            import json as _json
+            with open(signal_path, "r", encoding="utf-8") as f:
+                signal = _json.load(f)
+            if signal.get("resolved"):
+                return False
+            reason = " | ".join(signal.get("reason", []))
+            print(f"[{self.agent_id}] BURNOUT SIGNAL detected: {reason}")
+            self.bio_manager.set_bio("charging")
+            # 신호 해제 표시
+            signal["resolved"] = True
+            with open(signal_path, "w", encoding="utf-8") as f:
+                _json.dump(signal, f, indent=2, ensure_ascii=False)
+            return True
+        except Exception as e:
+            print(f"[{self.agent_id}] rest signal check error: {e}")
+            return False
