@@ -42,6 +42,24 @@ jobs:
             python -m src.devops.cli scripts/ --threshold 80 || true
           fi
 
+      # ── 🔍 Mention Scanner — Lynn 이름 언급 이슈 감지 ────────────
+      # "친절한 늑대 Lynn" / "@The-Courteous-Wolf-Lynn" 언급 이슈 자동 감지
+      - name: Lynn Mention Scanner — Detect @mentions
+        id: scanner
+        env:
+          GITHUB_TOKEN: ${{ secrets.Mulberry_CONTROL_TOKEN }}
+          MULBERRY_REPO_OWNER: wooriapt79
+          LYNN_SCAN_REPOS: mulberry-research-lab,mulberry-open-api
+        run: |
+          if [ -f scripts/lynn_mention_scanner.py ]; then
+            python scripts/lynn_mention_scanner.py
+            echo "exit_code=$?" >> $GITHUB_OUTPUT
+          else
+            echo "exit_code=skipped" >> $GITHUB_OUTPUT
+            echo "lynn_mention_scanner.py 없음 — 스킵"
+          fi
+        continue-on-error: true
+
       # ── Agent Relay — pending_posts 처리 ─────────────────────
       # 외부 도구 없는 에이전트들의 GitHub 참여 메시지를 자동 게시합니다
       - name: Agent Relay — Process pending posts (Lynn)
