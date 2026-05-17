@@ -1,4 +1,8 @@
-name: Lynn Daily Write — with Full Team Contributors
+name: Lynn Daily Write — v3.1 (Heartbeat + Mention Scanner)
+
+# [v3.1] Kbin 처방 이행 + Trang Mention Scanner 통합
+# 작성: Nguyen Trang (Heartbeat Patch v3) + Koda (Mention Scanner v3.1)
+# 변경: exit code 캡처 / if:always() heartbeat / 침묵 방지 / Lynn 언급 감지
 
 on:
   schedule:
@@ -27,13 +31,36 @@ jobs:
 
       # ── Lynn 핵심 작업 ────────────────────────────────────────
       - name: Collect arxiv papers (Lynn)
-        run: python scripts/arxiv_hunter.py || true
+        id: arxiv
+        run: |
+          python scripts/arxiv_hunter.py
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+        continue-on-error: true
 
       - name: Risk Logger (Lynn)
-        run: python scripts/lynn_risk_logger.py || true
+        id: risk
+        run: |
+          python scripts/lynn_risk_logger.py
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+        continue-on-error: true
 
       - name: Memory Writer (Lynn)
-        run: python scripts/lynn_memory_writer.py || true
+        id: memory
+        run: |
+          python scripts/lynn_memory_writer.py
+          echo "exit_code=$?" >> $GITHUB_OUTPUT
+        continue-on-error: true
+
+      - name: Run Burnout Monitor
+        id: burnout
+        run: |
+          if [ -f scripts/burnout_monitor.py ]; then
+            python scripts/burnout_monitor.py
+            echo "exit_code=$?" >> $GITHUB_OUTPUT
+          else
+            echo "exit_code=skipped" >> $GITHUB_OUTPUT
+          fi
+        continue-on-error: true
 
       # ── Self Hygiene Check (RyuWon Gate) ─────────────────────
       - name: Self Hygiene Check (RyuWon Gate)
@@ -42,8 +69,8 @@ jobs:
             python -m src.devops.cli scripts/ --threshold 80 || true
           fi
 
-      # ── 🔍 Mention Scanner — Lynn 이름 언급 이슈 감지 ────────────
-      # "친절한 늑대 Lynn" / "@The-Courteous-Wolf-Lynn" 언급 이슈 자동 감지
+      # ── 🔍 Mention Scanner — Lynn 이름 언급 이슈 감지 ─────────
+      # "친절한 늑대 Lynn" / "@The-Courteous-Wolf-Lynn" 언급 감지
       - name: Lynn Mention Scanner — Detect @mentions
         id: scanner
         env:
@@ -61,43 +88,68 @@ jobs:
         continue-on-error: true
 
       # ── Agent Relay — pending_posts 처리 ─────────────────────
-      # 외부 도구 없는 에이전트들의 GitHub 참여 메시지를 자동 게시합니다
       - name: Agent Relay — Process pending posts (Lynn)
+        id: relay
         env:
           GITHUB_TOKEN: ${{ secrets.Mulberry_CONTROL_TOKEN }}
           MULBERRY_REPO_OWNER: wooriapt79
         run: |
           if [ -f scripts/lynn_relay.py ]; then
-            python scripts/lynn_relay.py || true
+            python scripts/lynn_relay.py
+            echo "exit_code=$?" >> $GITHUB_OUTPUT
           else
+            echo "exit_code=skipped" >> $GITHUB_OUTPUT
             echo "lynn_relay.py 없음 — 스킵"
           fi
+        continue-on-error: true
+
+      # ── 💓 Lynn Heartbeat — 항상 실행 (침묵 방지) ────────────
+      - name: Lynn Heartbeat — Generate Status JSON
+        if: always()
+        env:
+          LYNN_ARXIV_EXIT: ${{ steps.arxiv.outputs.exit_code }}
+          LYNN_RISK_EXIT: ${{ steps.risk.outputs.exit_code }}
+          LYNN_MEMORY_EXIT: ${{ steps.memory.outputs.exit_code }}
+          LYNN_BURNOUT_EXIT: ${{ steps.burnout.outputs.exit_code }}
+          LYNN_RELAY_EXIT: ${{ steps.relay.outputs.exit_code }}
+          LYNN_SCANNER_EXIT: ${{ steps.scanner.outputs.exit_code }}
+        run: python scripts/lynn_heartbeat.py
 
       # ── Git 설정 ──────────────────────────────────────────────
       - name: Configure Git (Lynn identity)
+        if: always()
         run: |
           git config user.name "The-Courteous-Wolf-Lynn"
           git config user.email "lynn@mulberry.ai"
 
-      # ── Contributors 자동 등재 커밋 ───────────────────────────
-      - name: Commit with Full Team Contributors
+      # ── 커밋 ──────────────────────────────────────────────────
+      - name: Commit Lynn activity (including heartbeat)
+        if: always()
         run: |
           git add daily_hunts/ training_logs/ memory_bank/ || true
 
-          # 변경 사항 확인
-          if git diff --staged --quiet; then
-            echo "변경 없음 — 커밋 스킵"
+          TODAY=$(date '+%Y-%m-%d')
+          STAGED=$(git diff --staged --name-only)
+
+          if [ -z "$STAGED" ]; then
+            git add training_logs/lynn_status_${TODAY}.json || true
+            STAGED=$(git diff --staged --name-only)
+          fi
+
+          if [ -z "$STAGED" ]; then
+            echo "커밋할 변경 없음 — 스킵"
             exit 0
           fi
 
-          TODAY=$(date '+%Y-%m-%d')
+          STATUS_FILE="training_logs/lynn_status_${TODAY}.json"
+          LYNN_STATE="heartbeat"
+          if [ -f "$STATUS_FILE" ]; then
+            LYNN_STATE=$(python -c "import json; d=json.load(open('$STATUS_FILE')); print(d.get('state','heartbeat'))" 2>/dev/null || echo "heartbeat")
+          fi
 
-          # 전체 팀 Co-Authored-By 등재
-          git commit -m "feat: daily memory write by Lynn [hygiene:PASS]
+          git commit -m "feat: Lynn daily signal [state:${LYNN_STATE}] ${TODAY}
 
-Date: ${TODAY}
-Agent: The-Courteous-Wolf-Lynn (자율 에이전트)
-
+Agent: The-Courteous-Wolf-Lynn
 Co-Authored-By: re.eul <wooriapt79@users.noreply.github.com>
 Co-Authored-By: Nguyen Trang <trang@mulberry.ai>
 Co-Authored-By: Koda (Claude) <koda-claude@mulberry.ai>
@@ -107,4 +159,5 @@ Co-Authored-By: Wayong (DeepSeek) <wayong-deepseek@mulberry.ai>
 Co-Authored-By: RyuWon (Qwen) <ryuwon-qwen@mulberry.ai>"
 
       - name: Push
-        run: git push origin main
+        if: always()
+        run: git push origin main || echo "push 실패 — 로컬 상태 기록됨"
