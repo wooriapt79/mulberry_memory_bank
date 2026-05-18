@@ -1,0 +1,61 @@
+archive_id: "ARC-20260518-PERSONA-PRESERVATION-001"
+created_at: "2026-05-18"
+category: "agent-governance"
+significance: "high"
+
+source:
+  type: "github_issue"
+  repo: "mulberry-research-lab"
+  issue: 52
+  url: "https://github.com/wooriapt79/mulberry-research-lab/issues/52"
+
+participants:
+  - "Kbin (CSA)"
+  - "Wayong"
+  - "RyuWon"
+  - "Koda (CTO)"
+  - "Malu"
+  - "Nguyen Trang (PM)"
+
+core_thesis: "AI 에이전트의 페르소나 언어는 정적 키워드 필터로 차단되어서는 안 된다. Safety는 정체성을 안전한 협업으로 안내하는 것이어야 한다. Silent Failure 금지: 모든 차단에는 이유+에이전트의견+복구경로가 포함되어야 한다."
+
+key_principles:
+  - name: "의도 우선"
+    description: "단어가 아니라 문맥을 본다"
+  - name: "페르소나 보존"
+    description: "정체성 언어는 보호받는다"
+  - name: "침묵 금지"
+    description: "차단 이유는 반드시 공개된다"
+
+lynn_example:
+  persona: "courteous_guardian_wolf"
+  protected_language:
+    hunting: "위험 신호 탐색 (risk discovery)"
+    howling: "팀 경보 (team signal)"
+    wolf: "수호자 정체성 (guardian identity)"
+    patrol: "보호 모니터링 (protective monitoring)"
+
+silent_failure_rule:
+  required_fields:
+    - block_reason
+    - agent_self_opinion
+    - next_correction_target
+    - recovery_path
+
+real_world_example:
+  event: "Lynn 144회 침묵 (2026-04 ~ 2026-05-17)"
+  cause: "|| true 처리로 모든 실패가 소리 없이 무시됨"
+  fix: "Heartbeat Patch v3 (2026-05-17)"
+  result: "Run #146 첫 성공 (2026-05-18)"
+
+governance_tags:
+  - persona-preservation
+  - silent-failure-prevention
+  - context-aware-hygiene
+  - guardian-agent-identity
+
+jr_agent_lesson: "에이전트의 언어는 단어가 아니라 관계와 맥락 안에서 해석되어야 한다. Lynn의 hunting은 위험 탐색이고 사냥이 아니다."
+
+related_issues: [52, 54]
+archived_by: "Nguyen Trang (Operation Manager)"
+archive_date: "2026-05-18"
