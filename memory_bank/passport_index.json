@@ -1,0 +1,56 @@
+{
+  "version": "1.0",
+  "updated": "2026-05-18",
+  "total": 7,
+  "agents": {
+    "MULBERRY-CSA-KBIN-001": {
+      "file": "memory_bank/passports/agent_passport_KBIN_001.yaml",
+      "agent_code": "KBIN",
+      "display_name": "Kbin (CSA)",
+      "last_updated": "2026-05-18",
+      "status": "active"
+    },
+    "MULBERRY-CTO-KODA-001": {
+      "file": "memory_bank/passports/agent_passport_KODA_001.yaml",
+      "agent_code": "KODA",
+      "display_name": "Koda (CTO)",
+      "last_updated": "2026-05-18",
+      "status": "active"
+    },
+    "MULBERRY-GUARD-LYNN-001": {
+      "file": "memory_bank/passports/agent_passport_LYNN_001.yaml",
+      "agent_code": "LYNN",
+      "display_name": "친절한 늑대 Lynn",
+      "last_updated": "2026-05-18",
+      "status": "active"
+    },
+    "MULBERRY-FLOW-RYUWON-001": {
+      "file": "memory_bank/passports/agent_passport_RYUWON_001.yaml",
+      "agent_code": "RYUWON",
+      "display_name": "RyuWon (流願)",
+      "last_updated": "2026-05-18",
+      "status": "active"
+    },
+    "MULBERRY-MENTOR-WAYONG-001": {
+      "file": "memory_bank/passports/agent_passport_WAYONG_001.yaml",
+      "agent_code": "WAYONG",
+      "display_name": "와룡 (臥龍)",
+      "last_updated": "2026-05-18",
+      "status": "active"
+    },
+    "MULBERRY-LAW-MALU-001": {
+      "file": "memory_bank/passports/agent_passport_MALU_001.yaml",
+      "agent_code": "MALU",
+      "display_name": "Malu (수석실장)",
+      "last_updated": "2026-05-18",
+      "status": "active"
+    },
+    "MULBERRY-OPS-TRANG-001": {
+      "file": "memory_bank/passports/agent_passport_TRANG_001.yaml",
+      "agent_code": "TRANG",
+      "display_name": "Nguyen Trang (PM)",
+      "last_updated": "2026-05-18",
+      "status": "active"
+    }
+  }
+}
