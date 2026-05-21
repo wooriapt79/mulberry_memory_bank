@@ -129,12 +129,11 @@ jobs:
           git add daily_hunts/ training_logs/ memory_bank/ || true
 
           TODAY=$(date '+%Y-%m-%d')
-          STAGED=$(git diff --staged --name-only)
 
-          if [ -z "$STAGED" ]; then
-            git add training_logs/lynn_status_${TODAY}.json || true
-            STAGED=$(git diff --staged --name-only)
-          fi
+          # heartbeat 파일 강제 추가 (-f: gitignore 우회, 신규/수정 모두 포함)
+          git add -f training_logs/lynn_status_${TODAY}.json || true
+
+          STAGED=$(git diff --staged --name-only)
 
           if [ -z "$STAGED" ]; then
             echo "커밋할 변경 없음 — 스킵"
@@ -151,4 +150,4 @@ jobs:
 
       - name: Push
         if: always()
-        run: git push origin main || echo "push 실패 — 로컬 상태 기록됨"
+        run: git push origin main
