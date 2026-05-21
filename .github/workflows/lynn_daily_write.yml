@@ -150,4 +150,8 @@ jobs:
 
       - name: Push
         if: always()
-        run: git push origin main
+        env:
+          PUSH_TOKEN: ${{ secrets.Mulberry_CONTROL_TOKEN }}
+        run: |
+          git remote set-url origin https://x-access-token:${PUSH_TOKEN}@github.com/wooriapt79/mulberry_memory_bank.git
+          git push origin main
