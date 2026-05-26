@@ -1,0 +1,22 @@
+{
+  "date": "2026-05-26",
+  "timestamp": "2026-05-26T00:12:48.021748+00:00",
+  "run_id": "588a420b-ced7-4440-a064-f3dbc9c57828",
+  "agent": "The-Courteous-Wolf-Lynn",
+  "state": "active",
+  "message": "Lynn 정상 작동 — 오늘 briefing 생성 완료",
+  "details": {
+    "briefings": [
+      "/home/runner/work/mulberry_memory_bank/mulberry_memory_bank/daily_hunts/2026-05-26-briefing.md"
+    ]
+  },
+  "scripts": {
+    "arxiv_hunter": "0",
+    "risk_logger": "0",
+    "memory_writer": "0",
+    "burnout_monitor": "0",
+    "relay": "0"
+  },
+  "pending_posts_count": 0,
+  "generated_by": "lynn_heartbeat.py (Kbin 처방 v1, 2026-05-17)"
+}
