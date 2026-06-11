@@ -1,0 +1,23 @@
+{
+  "agent_id": "junior_lynn_v1",
+  "timestamp": "2026-06-11T00:23:30.626613+00:00",
+  "burnout_level": "NORMAL",
+  "action": "정상 운영 계속",
+  "flags": [],
+  "metrics": {
+    "total_records": 0,
+    "accuracy_trend": {
+      "recent": null,
+      "previous": null,
+      "degradation": 0.0,
+      "enough_data": false
+    },
+    "avg_stress_score": 0.0,
+    "avg_retry_count": 0.0
+  },
+  "thresholds": {
+    "degradation": 0.15,
+    "stress": 0.65,
+    "retry": 3.0
+  }
+}
