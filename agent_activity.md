@@ -57,3 +57,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/122
 
 ---
+## [LAB->Bank] issue_comment / 2026-06-17 18:26 UTC
+
+- Actor: wooriapt79
+- Issue: 🏆 [Program] "AI Trang — thông minh quá nhỉ 😍" Mulberry Team AI Startup Competition
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/118
+
+---
