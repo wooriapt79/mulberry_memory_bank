@@ -50,3 +50,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/122
 
 ---
+## [LAB->Bank] issues / 2026-06-17 17:07 UTC
+
+- Actor: wooriapt79
+- Issue: [DAY5] 도메인 에이전트 3~10번 구현 + Search UI 패널 Mission Control 통합
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/122
+
+---
