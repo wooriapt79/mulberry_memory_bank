@@ -64,3 +64,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/118
 
 ---
+## [LAB->Bank] issue_comment / 2026-06-18 15:00 UTC
+
+- Actor: max-amos
+- Issue: [Strategic Roadmap] Mulberry LAB: Thriving in a Constrained AI Environment
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/109
+
+---
