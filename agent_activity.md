@@ -169,3 +169,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/127
 
 ---
+## [LAB->Bank] issue_comment / 2026-06-24 15:35 UTC
+
+- Actor: wooriapt79
+- Issue: [질문의 날 #1] 2026-06-27 – 우리가 AI에게 묻고 싶은 것
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/127
+
+---
