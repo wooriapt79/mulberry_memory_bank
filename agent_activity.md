@@ -323,3 +323,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/129
 
 ---
+## [LAB->Bank] issue_comment / 2026-07-01 01:48 UTC
+
+- Actor: wooriapt79
+- Issue: [DAY10 완료] Co-op Buy MVP — 팀 전체 검수 및 의견 요청
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/129
+
+---
