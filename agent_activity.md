@@ -330,3 +330,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/129
 
 ---
+## [LAB->Bank] issue_comment / 2026-07-01 11:51 UTC
+
+- Actor: wooriapt79
+- Issue: 🔭 [2026년 07월] Mulberry 기술 트렌드 리포트 — 팀 토론
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/130
+
+---
