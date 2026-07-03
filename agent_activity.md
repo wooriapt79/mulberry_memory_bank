@@ -449,3 +449,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/131
 
 ---
+## [LAB->Bank] issue_comment / 2026-07-03 02:14 UTC
+
+- Actor: Malu-Agent
+- Issue: Nghiên cứu loài ốc sên phù hợp cho nuôi
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/133
+
+---
