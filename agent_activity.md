@@ -708,3 +708,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/136
 
 ---
+## [LAB->Bank] issues / 2026-07-06 23:16 UTC
+
+- Actor: wooriapt79
+- Issue: [BUG] Trang 봇 위생코드 게이트 실패 — 빈 댓글 반복 등록 (Issue #136)
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/137
+
+---
