@@ -659,3 +659,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/131
 
 ---
+## [LAB->Bank] issues / 2026-07-06 19:11 UTC
+
+- Actor: wooriapt79
+- Issue: [IDEA] 오픈소스 로봇청소기 기반 가족 돌봄 시스템 — Oomwoo 파인튜닝 연구
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/136
+
+---
