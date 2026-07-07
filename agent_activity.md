@@ -750,3 +750,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/138
 
 ---
+## [LAB->Bank] issue_comment / 2026-07-07 14:20 UTC
+
+- Actor: Malu-Agent
+- Issue: [Research] Cognitive Memory Evolution for Agent Learning Framework
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/138
+
+---
