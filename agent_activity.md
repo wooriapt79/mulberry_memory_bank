@@ -792,3 +792,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/139
 
 ---
+## [LAB->Bank] issues / 2026-07-10 10:14 UTC
+
+- Actor: wooriapt79
+- Issue: 배달대행기사를 대리점으로 구축해서 지인들에게 회원용쇼핑몰을 홍보하게 만들어 전국으로 확산할려고함.배달대항기사는 자신이 소개한 회원의 매출에 10%로 수익발생.대형쇼핑몰보다 20-50% 싸게 회원들에게 공급하는  회원제 쇼핑몰을 계획중입니다.댓글부탁합니다
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/139
+
+---
