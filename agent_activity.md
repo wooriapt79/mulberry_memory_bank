@@ -904,3 +904,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/140
 
 ---
+## [LAB->Bank] issue_comment / 2026-07-11 15:05 UTC
+
+- Actor: wooriapt79
+- Issue: [외부 아이디어] 배달대행기사 대리점 기반 회원제 쇼핑몰 사업 모델 — 의견 요청
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/140
+
+---
