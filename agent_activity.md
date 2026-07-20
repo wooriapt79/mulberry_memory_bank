@@ -974,3 +974,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/141
 
 ---
+## [LAB->Bank] issues / 2026-07-20 02:13 UTC
+
+- Actor: wooriapt79
+- Issue: feat(luna-rag): agent-gateway 카카오 webhook → Luna RAG 연동 — mulberry- 레포 Issue #12 후속
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/141
+
+---
