@@ -1023,3 +1023,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/144
 
 ---
+## [LAB->Bank] issue_comment / 2026-07-21 08:57 UTC
+
+- Actor: wooriapt79
+- Issue: [KODA] Luna v2.7 Carousel — routes/kakao.js 교체 및 Railway 배포
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/144
+
+---
