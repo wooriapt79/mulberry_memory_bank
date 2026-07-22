@@ -1093,3 +1093,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/145
 
 ---
+## [LAB->Bank] issue_comment / 2026-07-22 10:45 UTC
+
+- Actor: Malu-Agent
+- Issue: 🧠 AI 논문 스터디: Automated Discovery Has No Universally Superior Harness
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/145
+
+---
