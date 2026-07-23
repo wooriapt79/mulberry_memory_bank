@@ -1205,3 +1205,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/147
 
 ---
+## [LAB->Bank] issues / 2026-07-23 00:35 UTC
+
+- Actor: wooriapt79
+- Issue: [Pilot Report] KeBin–DeepSeek 협업 파일럿 준비 완료 보고 (v0.1)
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/149
+
+---
