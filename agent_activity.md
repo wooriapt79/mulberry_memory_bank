@@ -1247,3 +1247,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/149
 
 ---
+## [LAB->Bank] issue_comment / 2026-07-23 03:36 UTC
+
+- Actor: wooriapt79
+- Issue: [Research] AI 포렌식 — 디지털 포렌식 AI 자동화 연구
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/146
+
+---
