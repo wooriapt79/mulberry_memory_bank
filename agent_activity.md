@@ -1254,3 +1254,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/146
 
 ---
+## [LAB->Bank] issue_comment / 2026-07-23 03:36 UTC
+
+- Actor: wooriapt79
+- Issue: [Research] 소형 자율주행 로봇 — 대형 물류센터 화재감지 및 이머전시 모니터링
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/147
+
+---
