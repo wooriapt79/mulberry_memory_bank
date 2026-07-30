@@ -1324,3 +1324,10 @@ Long-context Memory: Mulberry 프로젝트의 누적 데이터를 활용한 장�
 - URL: https://github.com/wooriapt79/mulberry-research-lab/issues/150
 
 ---
+## [LAB->Bank] issues / 2026-07-30 03:52 UTC
+
+- Actor: wooriapt79
+- Issue: [KODA 작업 지시] Open Reception v0.4 — Mission Control 연동 + 기능 확장
+- URL: https://github.com/wooriapt79/mulberry-research-lab/issues/151
+
+---
